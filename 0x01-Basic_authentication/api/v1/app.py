@@ -46,6 +46,7 @@ def not_found(error) -> str:
 
 @app.before_request
 def before_request() -> str:
+    """filter each request"""
     if auth is None:
         return
 
