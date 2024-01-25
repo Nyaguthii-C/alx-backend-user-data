@@ -16,9 +16,17 @@ class Auth:
             excluded_paths (List[str]): paths exempted from authentication.
 
         Returns:
-            bool: True if authentication required, False otherwise
+           True if the path is not in the list of strings excluded_paths
         """
-        return False
+        if path is None or excluded_paths is None or excluded_paths == []:
+            return True
+        """Normalize paths to have a trailing slash"""
+        path = path.rstrip('/') + ('/')
+
+        if path in excluded_paths:
+            return False
+        else:
+            return True
 
     def authorization_header(self, request=None) -> str:
         """Generate an authorization header for the given request"""
